@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "semantic-ui-react";
 
-function PokemonCard() {
+function PokemonCard( {pokemon}) {
+  const [isFlipped, setIsFlipped] = useState(false)
+
+  function handleToggleFlipped() {
+    setIsFlipped(!isFlipped)
+  }
   return (
     <Card>
       <div>
-        <div className="image">
-          <img alt="oh no!" />
+        <div className="image" onClick={handleToggleFlipped}>
+          {isFlipped? 
+          <img src={pokemon.sprites.back} alt="back" />
+          :
+          <img src={pokemon.sprites.front }alt="front" />
+        }
+          
         </div>
         <div className="content">
-          <div className="header">POKEMON NAME HERE</div>
+          <div className="header">{pokemon.name}</div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat red" />
-            POKEMON HP HERE hp
+            {pokemon.hp}
           </span>
         </div>
       </div>
